@@ -11,11 +11,13 @@ import (
 
 type FileServer struct{}
 
-func (fs *FileServer) Start() {
-	ln, err := net.Listen("tcp", ":3000")
+func (fs *FileServer) Start(port string) {
+	port = ":" + port
+	ln, err := net.Listen("tcp", port)
 	if err != nil {
 		log.Fatal(err)
 	}
+	fmt.Printf("Server running on Port: %s\n", port)
 
 	for {
 		conn, err := ln.Accept()
